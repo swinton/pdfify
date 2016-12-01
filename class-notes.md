@@ -6,8 +6,10 @@
 - Last thing
 - Summary
 
+<div class="trainer-eyes-only">
 ### Session 1 trainer notes
 - ...
+</div>
 
 ## Session 2
 - Fourth thing
@@ -15,5 +17,7 @@
 - Sixth thing
 - Summary
 
+<div class="trainer-eyes-only">
 ### Session 1 trainer notes
 - ...
+</div>
