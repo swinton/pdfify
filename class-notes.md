@@ -7,8 +7,12 @@
 - Summary
 
 <div class="trainer-eyes-only">
-### Session 1 trainer notes
-- ...
+<h3>Session 1 trainer notes</h3>
+<ul>
+<li>...</li>
+<li>...</li>
+<li>...</li>
+</ul>
 </div>
 
 ## Session 2
@@ -18,6 +22,10 @@
 - Summary
 
 <div class="trainer-eyes-only">
-### Session 1 trainer notes
-- ...
+<h3>Session 2 trainer notes</h3>
+<ul>
+<li>...</li>
+<li>...</li>
+<li>...</li>
+</ul>
 </div>
