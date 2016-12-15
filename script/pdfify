@@ -1,0 +1,28 @@
+#!/bin/sh
+# Usage: script/pdfify /path/to/markdown/file.md
+# creates octocat-friendly PDF from Markdown
+#
+
+# Exit immediately if a command exits with a non-zero status.
+set -e
+
+STYLE="style.css"
+[ "$1" = "--student" -o "$1" = "-s" ] && {
+    STYLE="student.css"
+    shift
+}
+
+TMP=$( mktemp )
+BASE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+TARGET="$(basename -s md "$1")"pdf
+
+pandoc "$1" \
+    -f markdown_github \
+    -t html5 \
+    -o "$TMP.html"
+
+wkhtmltopdf \
+    --page-size letter \
+    --no-pdf-compression \
+    --user-style-sheet "${BASE_DIR}/.pdfify/${STYLE}" \
+    "$TMP.html" "$TARGET"
