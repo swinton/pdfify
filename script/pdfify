@@ -19,6 +19,7 @@ TARGET="$(basename -s md "$1")"pdf
 pandoc "$1" \
     -f markdown_github \
     -t html5 \
+    -B "${BASE_DIR}/.pdfify/header.html" \
     -o "$TMP.html"
 
 wkhtmltopdf \

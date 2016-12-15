@@ -1,6 +1,6 @@
-# Class Notes
+## Class Notes
 
-## Session 1
+### Session 1
 - First thing
 - Second thing
 - Last thing
@@ -15,7 +15,7 @@
 </ul>
 </div>
 
-## Session 2
+### Session 2
 - Fourth thing
 - Fifth thing
 - Sixth thing
