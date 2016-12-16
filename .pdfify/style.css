@@ -7,11 +7,11 @@ body {
     font-weight: lighter;
 }
 
-.letterhead>span {
-    font-family: "github-octicons";
-}
-
 .letterhead em {
     font-style: normal;
     font-weight: bold;
+}
+
+.octicon {
+    font-family: "github-octicons";
 }
