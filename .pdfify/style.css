@@ -8,6 +8,17 @@ body {
     font-size: 32px;
 }
 
+.letterhead svg {
+    position: absolute;
+}
+
+.letterhead span {
+    position: relative;
+    left: 36px;
+    top: 4px;
+
+}
+
 .letterhead em {
     font-style: normal;
     font-weight: bold;
