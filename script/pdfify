@@ -12,15 +12,17 @@ STYLE="style.css"
     shift
 }
 
-TMP=$( mktemp )
+TMP=$( mktemp -d )
 BASE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-TARGET="$(basename -s md "$1")"pdf
+TARGET="$(basename -s md "$1")"
 
 pandoc "$1" \
     -f markdown_github \
     -t html5 \
     -B "${BASE_DIR}/.pdfify/header.html" \
-    -o "$TMP.html"
+    -o "${TMP}/${TARGET}html"
+
+echo "${TMP}/${TARGET}html"
 
 wkhtmltopdf \
     --page-size letter \
@@ -32,4 +34,4 @@ wkhtmltopdf \
     --footer-font-name 'Source Sans Pro' \
     --footer-line \
     --user-style-sheet "${BASE_DIR}/.pdfify/${STYLE}" \
-    "$TMP.html" "$TARGET"
+    "${TMP}/${TARGET}html" "${TARGET}pdf"
