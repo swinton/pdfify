@@ -17,7 +17,7 @@ BASE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TARGET="$(basename -s md "$1")"
 
 pandoc "$1" \
-    -f markdown_github \
+    -f markdown_github+header_attributes \
     -t html5 \
     -B "${BASE_DIR}/.pdfify/header.html" \
     -o "${TMP}/${TARGET}html"
