@@ -5,6 +5,7 @@ body {
 .letterhead {
     font-family: "Apex New";
     font-weight: lighter;
+    font-size: 32px;
 }
 
 .letterhead em {
