@@ -25,5 +25,7 @@ pandoc "$1" \
 wkhtmltopdf \
     --page-size letter \
     --no-pdf-compression \
+    --margin-top 15 \
+    --margin-left 15 \
     --user-style-sheet "${BASE_DIR}/.pdfify/${STYLE}" \
     "$TMP.html" "$TARGET"
