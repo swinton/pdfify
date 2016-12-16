@@ -6,6 +6,7 @@ body {
     font-family: "Apex New";
     font-weight: lighter;
     font-size: 32px;
+    padding-bottom: 20px;
 }
 
 .letterhead svg {
@@ -14,8 +15,8 @@ body {
 
 .letterhead span {
     position: relative;
-    left: 36px;
-    top: 4px;
+    left: 48px;
+    top: 10px;
 
 }
 
