@@ -29,7 +29,6 @@ wkhtmltopdf \
     --no-pdf-compression \
     --margin-top 15 \
     --margin-left 15 \
-    --footer-left "$( date -u )" \
     --footer-right '[page]/[toPage]' \
     --footer-font-name 'Source Sans Pro' \
     --footer-line \
