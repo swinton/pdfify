@@ -5,6 +5,7 @@ Generates Octocat-friendly PDFs from Markdown.
 ## Installation
 
 ```
+brew cask install wkhtmltopdf
 brew tap swinton/brews
 brew install pdfify
 ```
