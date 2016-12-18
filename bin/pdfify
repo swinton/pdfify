@@ -13,13 +13,13 @@ STYLE="style.css"
 }
 
 TMP=$( mktemp -d )
-BASE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+BASE_DIR="$(brew --prefix)/opt/pdfify"
 TARGET="$(basename -s md "$1")"
 
 pandoc "$1" \
     -f markdown_github+header_attributes \
     -t html5 \
-    -B "${BASE_DIR}/.pdfify/header.html" \
+    -B "${BASE_DIR}/lib/header.html" \
     -o "${TMP}/${TARGET}html"
 
 echo "${TMP}/${TARGET}html"
@@ -32,5 +32,5 @@ wkhtmltopdf \
     --footer-right '[page]/[toPage]' \
     --footer-font-name 'Source Sans Pro' \
     --footer-line \
-    --user-style-sheet "${BASE_DIR}/.pdfify/${STYLE}" \
+    --user-style-sheet "${BASE_DIR}/lib/${STYLE}" \
     "${TMP}/${TARGET}html" "${TARGET}pdf"
