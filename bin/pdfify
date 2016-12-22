@@ -32,5 +32,6 @@ wkhtmltopdf \
     --footer-right '[page]/[toPage]' \
     --footer-font-name 'Source Sans Pro' \
     --footer-line \
+    --print-media-type \
     --user-style-sheet "${BASE_DIR}/lib/${STYLE}" \
     "${TMP}/${TARGET}html" "${TARGET}pdf"
