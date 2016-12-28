@@ -15,6 +15,7 @@ STYLE="style.css"
 TMP=$( mktemp -d )
 BASE_DIR="$(brew --prefix)/opt/pdfify"
 TARGET="$(basename -s md "$1")"
+TARGET_DIR="$(dirname "$1")"
 
 pandoc "$1" \
     -f markdown_github+header_attributes \
@@ -34,4 +35,4 @@ wkhtmltopdf \
     --footer-line \
     --print-media-type \
     --user-style-sheet "${BASE_DIR}/lib/${STYLE}" \
-    "${TMP}/${TARGET}html" "${TARGET}pdf"
+    "${TMP}/${TARGET}html" "${TARGET_DIR}/${TARGET}pdf"
