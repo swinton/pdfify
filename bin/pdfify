@@ -21,6 +21,7 @@ pandoc "$1" \
     -f markdown_github+header_attributes \
     -t html5 \
     -B "${BASE_DIR}/lib/header.html" \
+    -A "${BASE_DIR}/lib/footer.html" \
     -o "${TMP}/${TARGET}html"
 
 echo "${TMP}/${TARGET}html"
