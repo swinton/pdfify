@@ -14,10 +14,11 @@ STYLE="style.css"
 
 TMP=$( mktemp -d )
 BASE_DIR="$(brew --prefix)/opt/pdfify"
-TARGET="$(basename -s md "$1")"
-TARGET_DIR="$(dirname "$1")"
+TARGET="$(basename -s md "${1:-pdfify.}")"
+TARGET_DIR="$(dirname "${1:-.}")"
 
-pandoc "$1" \
+# Read from stdin, if filename not passed as first argument
+pandoc < "${1:-/dev/stdin}" \
     -f markdown_github+header_attributes \
     -t html5 \
     -B "${BASE_DIR}/lib/header.html" \
