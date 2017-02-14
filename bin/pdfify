@@ -12,8 +12,12 @@ STYLE="style.css"
     shift
 }
 
+BASE_DIR="$(brew --prefix)/opt/pdfify/lib"
+[ -d "$HOME/.pdfify" ] && {
+    BASE_DIR="$HOME/.pdfify"
+}
+
 TMP=$( mktemp -d )
-BASE_DIR="$(brew --prefix)/opt/pdfify"
 TARGET="$(basename -s md "${1:-pdfify.}")"
 TARGET_DIR="$(dirname "${1:-.}")"
 
@@ -21,8 +25,8 @@ TARGET_DIR="$(dirname "${1:-.}")"
 pandoc < "${1:-/dev/stdin}" \
     -f markdown_github+header_attributes \
     -t html5 \
-    -B "${BASE_DIR}/lib/header.html" \
-    -A "${BASE_DIR}/lib/footer.html" \
+    -B "${BASE_DIR}/header.html" \
+    -A "${BASE_DIR}/footer.html" \
     -o "${TMP}/${TARGET}html"
 
 echo "${TMP}/${TARGET}html"
@@ -36,5 +40,5 @@ wkhtmltopdf \
     --footer-font-name 'Source Sans Pro' \
     --footer-line \
     --print-media-type \
-    --user-style-sheet "${BASE_DIR}/lib/${STYLE}" \
+    --user-style-sheet "${BASE_DIR}/${STYLE}" \
     "${TMP}/${TARGET}html" "${TARGET_DIR}/${TARGET}pdf"
