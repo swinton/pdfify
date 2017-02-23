@@ -31,6 +31,14 @@ pandoc < "${1:-/dev/stdin}" \
 
 echo "${TMP}/${TARGET}html"
 
+# Include local images, preserving directory structure
+cd "${TARGET_DIR}" && \
+find . -iname "*.jpg" \
+    -or -iname "*.png" \
+    -or -iname "*.gif" \
+    | cpio -pdm "${TMP}"
+
+# Render PDF
 wkhtmltopdf \
     --page-size letter \
     --no-pdf-compression \
