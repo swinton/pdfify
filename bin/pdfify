@@ -1,44 +1,60 @@
 #!/bin/sh
-# Usage: script/pdfify /path/to/markdown/file.md
+# Usage: pdfify /path/to/markdown/file.md
 # creates octocat-friendly PDF from Markdown
 #
 
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
-STYLE="style.css"
-[ "$1" = "--student" -o "$1" = "-s" ] && {
-    STYLE="student.css"
-    shift
-}
-
-BASE_DIR="$(brew --prefix)/opt/pdfify/lib"
-[ -d "$HOME/.pdfify" ] && {
-    BASE_DIR="$HOME/.pdfify"
-}
-
 TMP=$( mktemp -d )
 TARGET="$(basename -s md "${1:-pdfify.}")"
-TARGET_DIR="$(dirname "${1:-.}")"
+TARGET_DIR="$(cd `dirname "${1:-.}"` && pwd)"
 
-# Read from stdin, if filename not passed as first argument
-pandoc < "${1:-/dev/stdin}" \
-    -f markdown_github+header_attributes \
-    -t html5 \
-    -B "${BASE_DIR}/header.html" \
-    -A "${BASE_DIR}/footer.html" \
-    -o "${TMP}/${TARGET}html"
+# Create BASE_DIR, to house supporting HTML, CSS
+BASE_DIR="${TMP}/.pdfify"
+mkdir "${BASE_DIR}"
 
-echo "${TMP}/${TARGET}html"
+# Install supporting HTML, CSS
+echo "===> installing supporting HTML, CSS <==="
+cd "$(brew --prefix)/opt/pdfify/lib" && \
+find . -iname "*.html" \
+    -or -iname "*.css" \
+    | cpio -pdm "${BASE_DIR}"
 
-# Include local images, preserving directory structure
+# Override default HTML, CSS from ~/.pdfify
+[ -d "$HOME/.pdfify" ] && {
+    echo "===> override activated <==="
+    cd "$HOME/.pdfify" && \
+    find . -iname "*.html" \
+        -or -iname "*.css" \
+        | cpio -pdm "${BASE_DIR}"
+}
+
+# Install local images, preserving directory structure
+echo "===> installing local images <==="
 cd "${TARGET_DIR}" && \
 find . -iname "*.jpg" \
     -or -iname "*.png" \
     -or -iname "*.gif" \
     | cpio -pdm "${TMP}"
 
-# Render PDF
+# Convert Markdown to HTML, reading from stdin, if filename not passed as first
+# argument
+echo "===> converting to HTML <==="
+cd "${TARGET_DIR}" && \
+pandoc < "${1:-/dev/stdin}" \
+    -f markdown_github+header_attributes \
+    -t html5 \
+    -c "${BASE_DIR}/style.css" \
+    -B "${BASE_DIR}/header.html" \
+    -A "${BASE_DIR}/footer.html" \
+    -o "${TMP}/${TARGET}html"
+
+# Echo generated HTML file, for debugging
+echo "${TMP}/${TARGET}html"
+
+# Render PDF from HTML
+echo "===> converting to PDF <==="
 wkhtmltopdf \
     --page-size letter \
     --no-pdf-compression \
@@ -48,5 +64,6 @@ wkhtmltopdf \
     --footer-font-name 'Source Sans Pro' \
     --footer-line \
     --print-media-type \
-    --user-style-sheet "${BASE_DIR}/${STYLE}" \
     "${TMP}/${TARGET}html" "${TARGET_DIR}/${TARGET}pdf"
+
+echo "===> " "${TARGET_DIR}/${TARGET}pdf" " <==="
