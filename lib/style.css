@@ -24,3 +24,7 @@ body {
     font-style: normal;
     font-weight: bold;
 }
+
+.page-break {
+    page-break-before: always;
+}

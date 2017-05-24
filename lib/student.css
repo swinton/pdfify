@@ -1,6 +1,0 @@
-@import url("style.css");
-
-.trainer-eyes-only,
-.trainer-eyes-only+ul {
-    display: none;
-}
