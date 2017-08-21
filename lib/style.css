@@ -2,6 +2,10 @@ body {
     font-family: "Source Sans Pro";
 }
 
+img {
+    max-width: 100%;
+}
+
 .letterhead {
     font-family: "Apex New";
     font-weight: lighter;
