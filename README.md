@@ -4,7 +4,7 @@ Generates Octocat-friendly PDFs from Markdown.
 
 ## Installation
 
-```
+```bash
 brew cask install wkhtmltopdf  # see note below
 brew tap swinton/brews
 brew install pdfify
@@ -14,7 +14,7 @@ brew install pdfify
 
 ## Usage
 
-```
+```bash
 pdfify /path/to/some/markdown/file.md
 ```
 
