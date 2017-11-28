@@ -10,7 +10,7 @@ brew tap swinton/brews
 brew install pdfify
 ```
 
-:warning: Due to [an existing `wkhtmltopdf` bug](https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3241), until this gets fixed, you may want to manually install [an earlier version of `wkhtmltopdf`](http://download.gna.org/wkhtmltopdf/0.12/0.12.3/).
+:warning: Due to [an existing `wkhtmltopdf` bug](https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3241), until this gets fixed, you may want to manually install [an earlier version of `wkhtmltopdf`](https://github.com/wkhtmltopdf/wkhtmltopdf/releases/tag/0.12.3).
 
 ## Usage
 
